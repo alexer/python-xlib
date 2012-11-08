@@ -35,6 +35,9 @@ import xobject.fontable
 import xobject.colormap
 import xobject.cursor
 
+# Xlib.ext modules
+import ext.render
+
 _resource_baseclasses = {
     'resource': xobject.resource.Resource,
     'drawable': xobject.drawable.Drawable,
@@ -45,12 +48,15 @@ _resource_baseclasses = {
     'gc': xobject.fontable.GC,
     'colormap': xobject.colormap.Colormap,
     'cursor': xobject.cursor.Cursor,
+    'picture': ext.render.Picture,
+    'glyphset': ext.render.GlyphSet,
     }
 
 _resource_hierarchy = {
     'resource': ('drawable', 'window', 'pixmap',
                  'fontable', 'font', 'gc',
-                 'colormap', 'cursor'),
+                 'colormap', 'cursor',
+                 'picture', 'glyphset'),
     'drawable': ('window', 'pixmap'),
     'fontable': ('font', 'gc')
     }

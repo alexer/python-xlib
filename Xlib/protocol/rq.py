@@ -336,6 +336,14 @@ class Cursor(Resource):
     cast_function = '__cursor__'
     class_name = 'cursor'
 
+class Picture(Resource):
+    cast_function = '__picture__'
+    class_name = 'picture'
+
+class GlyphSet(Resource):
+    cast_function = '__glyphset__'
+    class_name = 'glyphset'
+
 
 class Bool(ValueField):
     structvalues = 1
