@@ -570,9 +570,13 @@ class Object(ValueField):
             for f in self.type.fields:
                 if f.name:
                     if f.check_value is None:
-                        vals.append(val[i])
+                        v = val[i]
                     else:
-                        vals.append(f.check_value(val[i]))
+                        v = f.check_value(val[i])
+                    if f.structvalues == 1:
+                        vals.append(v)
+                    else:
+                        vals.extend(v)
                     i = i + 1
             return vals
 
@@ -587,9 +591,13 @@ class Object(ValueField):
         for f in self.type.fields:
             if f.name:
                 if f.check_value is None:
-                    vals.append(data[f.name])
+                    v = data[f.name]
                 else:
-                    vals.append(f.check_value(data[f.name]))
+                    v = f.check_value(data[f.name])
+                if f.structvalues == 1:
+                    vals.append(v)
+                else:
+                    vals.extend(v)
 
         return vals
 
