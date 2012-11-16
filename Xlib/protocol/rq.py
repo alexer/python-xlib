@@ -515,6 +515,8 @@ class List(ValueField):
     def pack_value(self, val):
         # Single-char values, we'll assume that means integer lists.
         if self.type.structcode and len(self.type.structcode) == 1:
+            if self.type.check_value is not None:
+                val = [self.type.check_value(v) for v in val]
             data = array(struct_to_array_codes[self.type.structcode],
                                val).tostring()
         else:
@@ -821,6 +823,7 @@ class ScalarObj:
         self.structcode = code
         self.structvalues = 1
         self.parse_value = None
+        self.check_value = None
 
 Card8Obj  = ScalarObj('B')
 Card16Obj = ScalarObj('H')
@@ -832,6 +835,7 @@ class ResourceObj:
 
     def __init__(self, class_name):
         self.class_name = class_name
+        self.check_value = None
 
     def parse_value(self, value, display):
         # if not display:
